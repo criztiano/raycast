@@ -141,6 +141,7 @@ export default async function Command() {
       await downloadFile(target.owner, target.repo, target.branch, target.path, outputPath);
 
       toast.hide();
+      execFileAsync("/usr/bin/afplay", ["/System/Library/Sounds/Glass.aiff"]);
       await showHUD(`✅ Downloaded ~/Downloads/${target.name}`);
     } else {
       toast.title = `Downloading folder ${target.name}/...`;
@@ -158,6 +159,7 @@ export default async function Command() {
       );
 
       toast.hide();
+      execFileAsync("/usr/bin/afplay", ["/System/Library/Sounds/Glass.aiff"]);
       await showHUD(`✅ Downloaded ${count} files to ~/Downloads/${target.name}/`);
     }
   } catch (error) {
