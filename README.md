@@ -7,10 +7,11 @@ Download files from GitHub directly to your `~/Downloads` folder — just copy t
 
 ## Features
 
-- **Paste & Go** — Copy a GitHub file URL, run the command, file lands in `~/Downloads`
-- **Multiple URL Formats** — Supports `github.com/…/blob/…`, `github.com/…/raw/…`, and `raw.githubusercontent.com` links
+- **Paste & Go** — Copy a GitHub URL, run the command, done
+- **Files & Folders** — Download single files or entire directories (recursively, preserving structure)
+- **Multiple URL Formats** — Supports `/blob/`, `/tree/`, `/raw/`, and `raw.githubusercontent.com` links
 - **Uses `gh` CLI Auth** — No extra tokens needed, works with your existing GitHub CLI session
-- **Instant Feedback** — HUD notification confirms the download
+- **Instant Feedback** — HUD notification confirms the download, with progress toast for folders
 
 ## Install
 
@@ -25,20 +26,22 @@ Download files from GitHub directly to your `~/Downloads` folder — just copy t
 
 ## Usage
 
-1. **Copy** a GitHub file URL to your clipboard, e.g.:
+1. **Copy** a GitHub file or folder URL to your clipboard, e.g.:
    ```
    https://github.com/owner/repo/blob/main/src/index.ts
+   https://github.com/owner/repo/tree/main/src/components
    ```
 2. **Open Raycast** and run **"Download GitHub File"**
-3. File is saved to `~/Downloads` and a notification confirms it ✅
+3. File or folder is saved to `~/Downloads` and a notification confirms it ✅
 
 ### Supported URL Formats
 
-| Format | Example |
-|--------|---------|
-| Blob | `https://github.com/owner/repo/blob/main/path/file.ext` |
-| Raw | `https://github.com/owner/repo/raw/main/path/file.ext` |
-| Raw CDN | `https://raw.githubusercontent.com/owner/repo/main/path/file.ext` |
+| Format | Type | Example |
+|--------|------|---------|
+| Blob | File | `https://github.com/owner/repo/blob/main/path/file.ext` |
+| Tree | Folder | `https://github.com/owner/repo/tree/main/path/folder` |
+| Raw | File | `https://github.com/owner/repo/raw/main/path/file.ext` |
+| Raw CDN | File | `https://raw.githubusercontent.com/owner/repo/main/path/file.ext` |
 
 ## Development
 
