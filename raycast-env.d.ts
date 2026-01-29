@@ -19,6 +19,9 @@ declare namespace Preferences {
 
 declare namespace Arguments {
   /** Arguments passed to the `download-file` command */
-  export type DownloadFile = {}
+  export type DownloadFile = {
+  /** GitHub file URL */
+  "url": string
+}
 }
 

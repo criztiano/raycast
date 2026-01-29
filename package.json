@@ -22,6 +22,14 @@
         "gh",
         "file",
         "save"
+      ],
+      "arguments": [
+        {
+          "name": "url",
+          "type": "text",
+          "placeholder": "GitHub file URL",
+          "required": false
+        }
       ]
     }
   ],

@@ -1,4 +1,4 @@
-import { showHUD, showToast, Toast, Clipboard } from "@raycast/api";
+import { showHUD, showToast, Toast, Clipboard, LaunchProps } from "@raycast/api";
 import { execFile } from "child_process";
 import { promisify } from "util";
 import { writeFile, mkdir } from "fs/promises";
@@ -6,6 +6,10 @@ import { homedir } from "os";
 import { join, basename } from "path";
 
 const execFileAsync = promisify(execFile);
+
+interface Arguments {
+  url?: string;
+}
 
 interface GitHubFile {
   owner: string;
@@ -62,21 +66,21 @@ function parseGitHubUrl(url: string): GitHubFile | null {
   }
 }
 
-export default async function Command() {
+export default async function Command(props: LaunchProps<{ arguments: Arguments }>) {
   const toast = await showToast({
     style: Toast.Style.Animated,
-    title: "Reading clipboard...",
+    title: "Preparing download...",
   });
 
   try {
-    // Get URL from clipboard
-    const clipboardText = await Clipboard.readText();
-    if (!clipboardText) {
-      throw new Error("Clipboard is empty");
+    // Get URL from argument first, then fall back to clipboard
+    const inputUrl = props.arguments.url?.trim() || (await Clipboard.readText())?.trim();
+    if (!inputUrl) {
+      throw new Error("No URL provided — paste a GitHub file URL or copy one to clipboard");
     }
 
     // Parse the GitHub URL
-    const file = parseGitHubUrl(clipboardText);
+    const file = parseGitHubUrl(inputUrl);
     if (!file) {
       throw new Error("Not a valid GitHub file URL");
     }
